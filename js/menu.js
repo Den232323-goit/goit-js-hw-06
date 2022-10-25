@@ -100,3 +100,54 @@ inputName.addEventListener("input", (e) => {
 });
 
 // Задача 6
+const input = document.querySelector("#validation-input");
+input.addEventListener("blur", (event) => {
+  if (event.currentTarget.value.length == input.dataset.length) {
+    input.classList.add("valid");
+    input.classList.remove("invalid");
+  } else {
+    input.classList.add("invalid");
+    input.classList.remove("valid");
+  }
+});
+
+// Задача 7
+
+const inputTextRef = document.querySelector("#text");
+const inputControlRef = document.querySelector("#font-size-control");
+
+inputControlRef.addEventListener("input", (event) => {
+  inputTextRef.style.fontSize = inputControlRef.value + "px";
+});
+
+// Задача 8
+
+const form = document.querySelector(".login-form");
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const {
+    elements: { email, password },
+  } = event.currentTarget;
+  if (email.value === "" || password.value === "") {
+    alert("Всі поля повинні бути заповнені!");
+  } else {
+    console.log({ email: email.value, password: password.value });
+    form.reset();
+  }
+});
+
+// Задача 9
+
+function getRandomHexColor() {
+  return `#${Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, 0)}`;
+}
+
+const changeColorBtn = document.querySelector(".change-color");
+const color = document.querySelector(".color");
+
+changeColorBtn.addEventListener("click", () => {
+  document.body.style.backgroundColor = getRandomHexColor();
+  color.textContent = backgroundColor.value;
+});
