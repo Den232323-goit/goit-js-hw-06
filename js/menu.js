@@ -55,17 +55,21 @@ const images = [
   },
 ];
 
-let ulImages = document.querySelector(".gallery");
-let galleryElList = [];
-images.forEach(function (element) {
-  let li = document.createElement("li");
-  let img = document.createElement("img");
-  img.setAttribute("src", element.url);
-  img.setAttribute("alt", element.alt);
-  li.appendChild(img);
-  galleryElList.push(li);
-});
-ulImages.append(...galleryElList);
+const galleryRef = document.querySelector(".gallery");
+
+galleryRef.insertAdjacentHTML(
+  `afterbegin`,
+  images
+    .map(
+      (img) =>
+        `<li>
+    <img
+    src="${img.url}" 
+    alt="${img.alt}">
+    </li>`
+    )
+    .join("")
+);
 
 // Задача 4
 
@@ -146,8 +150,11 @@ function getRandomHexColor() {
 
 const changeColorBtn = document.querySelector(".change-color");
 const color = document.querySelector(".color");
+const body = document.querySelector("body");
 
 changeColorBtn.addEventListener("click", () => {
-  document.body.style.backgroundColor = getRandomHexColor();
-  color.textContent = backgroundColor.value;
+  const randomColor = getRandomHexColor();
+  document.body.style.backgroundColor = randomColor;
+
+  color.textContent = randomColor;
 });
